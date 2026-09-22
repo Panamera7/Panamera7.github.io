@@ -1,0 +1,9 @@
+{
+  "name": "GestorIA",
+  "short_name": "GestorIA",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f3eee6",
+  "theme_color": "#1b3a4b",
+  "lang": "es-ES"
+}
