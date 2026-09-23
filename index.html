@@ -16,7 +16,7 @@
     <header class="top">
       <div>
         <h1 class="brand">Gestor<span>IA</span></h1>
-        <p class="sub">Versión 1 · documentos, trimestre y NRC. Nada se presenta solo.</p>
+        <p class="sub">Versión 1.1 · lectura reforzada. Nada se presenta solo.</p>
       </div>
       <div class="clock" id="clock"></div>
     </header>
@@ -29,11 +29,11 @@
       <div class="grid">
         <article class="card">
           <h2>Subir factura o ticket</h2>
-          <p class="muted">PDF o foto. Completa a mano si la lectura falla.</p>
+          <p class="muted">Mejor un PDF de factura digital o una foto nítida en JPEG/PNG, de frente y con luz. Evita HEIC de iPhone si puedes.</p>
           <div class="drop" id="drop">
             <p>Suelta el archivo o</p>
-            <button class="btn sec" type="button" id="pickBtn">Elegir archivo</button>
-            <input id="file" type="file" accept="application/pdf,image/*" />
+            <button class="btn sec" type="button" id="pickBtn">Elegir o hacer foto</button>
+            <input id="file" type="file" accept="application/pdf,image/*" capture="environment" />
           </div>
           <div class="preview" id="preview"></div>
           <div class="row"><div><label>Entidad</label><select id="entidad"></select></div>
@@ -44,6 +44,8 @@
             <div><label>IVA %</label><select id="ivaTipo"><option>21</option><option>10</option><option>4</option><option>0</option></select></div></div>
           <div class="row"><div><label>Cuota IVA €</label><input id="cuota" type="number" step="0.01" /></div><div><label>Total €</label><input id="total" type="number" step="0.01" /></div></div>
           <p class="muted" id="ocrMsg"></p>
+          <label>Texto leído (para comprobar)</label>
+          <textarea id="ocrRaw" rows="5" placeholder="Aquí aparecerá lo que ha visto el lector."></textarea>
           <button class="btn sec" type="button" id="ocrBtn">Leer documento</button>
           <button class="btn" type="button" id="saveBtn">Guardar en bandeja</button>
         </article>
@@ -81,6 +83,6 @@
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=11"></script>
 </body>
 </html>
