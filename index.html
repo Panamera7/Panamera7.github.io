@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GestorIA · Versión 1</title>
+  <title>GestorIA</title>
   <link rel="manifest" href="manifest.json" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="theme-color" content="#1b3a4b" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
@@ -16,7 +15,7 @@
     <header class="top">
       <div>
         <h1 class="brand">Gestor<span>IA</span></h1>
-        <p class="sub">Versión 1.1 · lectura reforzada. Nada se presenta solo.</p>
+        <p class="sub">v1.2 · lector de facturas en la nube. Nada se presenta solo.</p>
       </div>
       <div class="clock" id="clock"></div>
     </header>
@@ -24,16 +23,17 @@
       <button class="on" data-tab="docs">Documentos</button>
       <button data-tab="trimestre">Trimestre 3T</button>
       <button data-tab="entidades">Entidades</button>
+      <button data-tab="config">Lector</button>
     </nav>
     <section id="tab-docs">
       <div class="grid">
         <article class="card">
           <h2>Subir factura o ticket</h2>
-          <p class="muted">Mejor un PDF de factura digital o una foto nítida en JPEG/PNG, de frente y con luz. Evita HEIC de iPhone si puedes.</p>
+          <p class="muted">PDF o JPEG/PNG. Con clave de Mindee o OCR.space lee como Holded: campos, no solo letras.</p>
           <div class="drop" id="drop">
             <p>Suelta el archivo o</p>
             <button class="btn sec" type="button" id="pickBtn">Elegir o hacer foto</button>
-            <input id="file" type="file" accept="application/pdf,image/*" capture="environment" />
+            <input id="file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp" />
           </div>
           <div class="preview" id="preview"></div>
           <div class="row"><div><label>Entidad</label><select id="entidad"></select></div>
@@ -44,8 +44,8 @@
             <div><label>IVA %</label><select id="ivaTipo"><option>21</option><option>10</option><option>4</option><option>0</option></select></div></div>
           <div class="row"><div><label>Cuota IVA €</label><input id="cuota" type="number" step="0.01" /></div><div><label>Total €</label><input id="total" type="number" step="0.01" /></div></div>
           <p class="muted" id="ocrMsg"></p>
-          <label>Texto leído (para comprobar)</label>
-          <textarea id="ocrRaw" rows="5" placeholder="Aquí aparecerá lo que ha visto el lector."></textarea>
+          <label>Texto / JSON leído</label>
+          <textarea id="ocrRaw" rows="5"></textarea>
           <button class="btn sec" type="button" id="ocrBtn">Leer documento</button>
           <button class="btn" type="button" id="saveBtn">Guardar en bandeja</button>
         </article>
@@ -80,9 +80,21 @@
         <div class="list" id="listaEnt" style="margin-top:14px"></div>
       </article>
     </section>
+    <section id="tab-config" class="hidden">
+      <article class="card">
+        <h2>Lector de facturas</h2>
+        <p class="muted">La clave se guarda solo en este móvil. No viaja a Netcup ni a Grok. Empieza por Mindee (cuenta gratis): <a href="https://platform.mindee.com" target="_blank" rel="noopener">platform.mindee.com</a>. Alternativa: <a href="https://ocr.space/ocrapi" target="_blank" rel="noopener">ocr.space</a>.</p>
+        <label>Clave Mindee (recomendada, facturas)</label>
+        <input id="keyMindee" type="password" autocomplete="off" />
+        <label>Clave OCR.space (reserva)</label>
+        <input id="keySpace" type="password" autocomplete="off" />
+        <button class="btn" type="button" id="saveKeys">Guardar claves</button>
+        <p class="muted" id="keyMsg"></p>
+      </article>
+    </section>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js?v=11"></script>
+  <script src="app.js?v=12"></script>
 </body>
 </html>
