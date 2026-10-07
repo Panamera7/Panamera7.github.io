@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - feriapiso-demo/assets-b64/**
+      - feriapiso-demo/**
       - .github/workflows/feriapiso-demo-assets.yml
 jobs:
   decode:
@@ -12,30 +12,64 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Decode base64 assets to JPEGs
+      - name: Build demo images
         run: |
           set -e
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq python3-pil curl
           mkdir -p feriapiso-demo/fotos/p1 feriapiso-demo/fotos/p2 feriapiso-demo/fotos/p3 feriapiso-demo/brand
-          for f in feriapiso-demo/assets-b64/*.b64; do
+          if [ -f feriapiso-demo/assets-b64/logo.png.b64 ]; then
+            base64 -d feriapiso-demo/assets-b64/logo.png.b64 > feriapiso-demo/brand/logo.png
+          fi
+          if [ -f feriapiso-share/barcelona-mar.jpg ]; then
+            cp feriapiso-share/barcelona-mar.jpg feriapiso-demo/fotos/barcelona-mar.jpg
+          fi
+          curl -sL --fail \
+            "https://staticmap.openstreetmap.de/staticmap.php?center=41.37378,2.10416&zoom=16&size=900x500&maptype=mapnik&markers=41.37378,2.10416,red-pushpin" \
+            -o feriapiso-demo/fotos/mapa-palmer.jpg || true
+          if [ -f feriapiso-demo/assets-b64/PHOTOS.manifest ]; then
+            while IFS='|' read -r rel b64; do
+              [ -z "$rel" ] && continue
+              out="feriapiso-demo/$rel"
+              mkdir -p "$(dirname "$out")"
+              printf '%s' "$b64" | base64 -d > "$out"
+            done < feriapiso-demo/assets-b64/PHOTOS.manifest
+          fi
+          for f in feriapiso-demo/assets-b64/p*.b64; do
             [ -f "$f" ] || continue
             base=$(basename "$f" .b64)
-            if [[ "$base" == "logo.png" ]]; then
-              out="feriapiso-demo/brand/logo.png"
-            elif [[ "$base" == *__* ]]; then
-              apt="${base%%__*}"
-              file="${base#*__}"
-              out="feriapiso-demo/fotos/${apt}/${file}"
-            else
-              out="feriapiso-demo/fotos/${base}"
-            fi
-            base64 -d "$f" > "$out"
-            echo "wrote $out ($(wc -c < "$out") bytes)"
+            apt="${base%%__*}"; file="${base#*__}"
+            base64 -d "$f" > "feriapiso-demo/fotos/${apt}/${file}"
           done
-          ls -laR feriapiso-demo/fotos feriapiso-demo/brand || true
-      - name: Commit decoded images
+          python3 << 'PY'
+from pathlib import Path
+try:
+    from PIL import Image, ImageDraw
+except ImportError:
+    import subprocess, sys
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pillow", "-q"])
+    from PIL import Image, ImageDraw
+for name, label, color in [
+    ("p1/01.jpg", "Palmer I", (0, 139, 124)),
+    ("p2/01.jpg", "Palmer II", (0, 110, 100)),
+    ("p3/01.jpg", "Palmer III", (20, 90, 120)),
+]:
+    path = Path("feriapiso-demo/fotos") / name
+    if path.exists() and path.stat().st_size > 1000:
+        continue
+    path.parent.mkdir(parents=True, exist_ok=True)
+    im = Image.new("RGB", (800, 520), color)
+    d = ImageDraw.Draw(im)
+    d.text((40, 220), label, fill=(255, 255, 255))
+    d.text((40, 280), "feriapiso demo", fill=(220, 240, 235))
+    im.save(path, "JPEG", quality=85)
+    print("placeholder", path)
+PY
+          ls -laR feriapiso-demo/fotos feriapiso-demo/brand
+      - name: Commit images
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add feriapiso-demo/fotos feriapiso-demo/brand
-          git diff --staged --quiet || git commit -m "feriapiso-demo: decode photo assets"
+          git diff --staged --quiet || git commit -m "feriapiso-demo: build demo images (map + covers)"
           git push
