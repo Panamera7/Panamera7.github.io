@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>feriapiso — demo Palmer + mapa</title>
+  <meta name="description" content="Demo pública de Feriapiso: apartamentos Palmer I, II y III con mapa. No es feriapiso.com.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="./brand/logo.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="./styles.css">
+  <meta property="og:title" content="feriapiso — demo Palmer">
+  <meta property="og:description" content="Apartamentos Palmer I, II y III en L'Hospitalet · demo pública">
+  <meta property="og:image" content="https://panamera7.github.io/feriapiso-demo/fotos/barcelona-mar.jpg">
+</head>
+<body>
+  <div class="demo-banner">Demo pública · No es feriapiso.com (ese sitio sigue en mantenimiento)</div>
+  <header class="topbar">
+    <a class="brand" href="./index.html">
+      <img src="./brand/logo.png" width="150" height="84" alt="feriapiso">
+      <span class="wordmark"><span class="feria">feria</span><span class="piso">piso</span></span>
+    </a>
+    <nav>
+      <a href="#alojamientos">Alojamientos</a>
+      <a href="#mapa">Mapa</a>
+      <a href="#palmer">Palmer</a>
+    </nav>
+  </header>
+
+  <figure class="hero">
+    <img src="./fotos/barcelona-mar.jpg" alt="Barcelona desde el mar">
+    <figcaption>Barcelona · Demo de portal Feriapiso</figcaption>
+  </figure>
+
+  <form id="search" class="searchbox">
+    <label>Destino<input id="destination" placeholder="Barcelona, Hospitalet…" value="Barcelona"></label>
+    <label>Entrada<input id="checkin" type="date"></label>
+    <label>Salida<input id="checkout" type="date"></label>
+    <label>Huéspedes<select id="guests"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></label>
+    <button type="submit">Buscar</button>
+  </form>
+
+  <main class="split" id="destinos">
+    <section id="alojamientos" class="section">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow" id="resultCount">Resultados</p>
+          <h2>Alojamientos</h2>
+        </div>
+        <div class="view-switch">
+          <button id="listView" type="button">Solo lista</button>
+          <button id="splitView" class="active" type="button">Lista + mapa</button>
+          <button id="mapView" type="button">Solo mapa</button>
+        </div>
+      </div>
+      <aside class="filters">
+        <label class="check"><input type="checkbox" id="onlyPalmer" checked> Palmer (propio)</label>
+      </aside>
+      <div id="results" class="cards"></div>
+    </section>
+    <div id="mapResults" class="map-results" aria-label="Mapa"></div>
+  </main>
+
+  <section id="palmer" class="palmer">
+    <div>
+      <p class="eyebrow">BARCELONA · L'HOSPITALET</p>
+      <h2>Feriapiso Apartments Palmer</h2>
+      <p>Tres apartamentos en Amadeu Vives 42, Pubilla Cases. Palmer I (hasta 2), Palmer II (hasta 3) y Palmer III (hasta 5).</p>
+    </div>
+    <a href="#alojamientos">Ver Palmer 1, 2 y 3</a>
+  </section>
+
+  <section id="mapa" class="static-map section">
+    <h2>Ubicación del edificio</h2>
+    <div class="map-wrap">
+      <img src="./fotos/mapa-palmer.jpg" alt="Mapa OpenStreetMap de Amadeu Vives 42, L'Hospitalet">
+      <p class="caption">Amadeu Vives 42, L'Hospitalet de Llobregat. Punto rojo = edificio. Mapa © colaboradores de OpenStreetMap.</p>
+    </div>
+  </section>
+
+  <footer>
+    feriapiso · demo pública (fuente: rebuild/feriapiso-v1 @ 528c91d + fotos Palmer) ·
+    <a href="https://panamera7.github.io/feriapiso-share/">aviso mantenimiento</a>
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
