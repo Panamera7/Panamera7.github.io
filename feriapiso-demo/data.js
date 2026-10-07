@@ -1,0 +1,66 @@
+/** Demo inventory — Palmer units (offline / read-only). Source: feriapiso-v1 + web-sandbox. */
+export const BUILDING = {
+  address: "Amadeu Vives 42, L'Hospitalet de Llobregat",
+  lat: 41.37378,
+  lng: 2.10416,
+};
+
+export const inventory = [
+  {
+    id: "palmer-1",
+    name: "Palmer I",
+    capacity: 2,
+    bedrooms: 1,
+    bathrooms: 1,
+    area: "50 m²",
+    floor: "Planta baja",
+    license: "ATB-000163",
+    night: 95,
+    provider: "Palmer",
+    destination: "L’Hospitalet de Llobregat · Barcelona",
+    lat: 41.37378,
+    lng: 2.10416,
+    cover: "./fotos/p1/01.jpg",
+    gallery: ["./fotos/p1/01.jpg","./fotos/p1/02.jpg","./fotos/p1/03.jpg","./fotos/p1/04.jpg"],
+    description:
+      "1 cama doble y 1 sofá cama doble. Acceso directo desde la calle. Salón/comedor con cocina integrada, patio interior, licencia ATB-000163.",
+  },
+  {
+    id: "palmer-2",
+    name: "Palmer II",
+    capacity: 3,
+    bedrooms: 2,
+    bathrooms: 1,
+    area: "—",
+    floor: "1ª planta · sin ascensor",
+    license: "—",
+    night: 110,
+    provider: "Palmer",
+    destination: "L’Hospitalet de Llobregat · Barcelona",
+    lat: 41.37385,
+    lng: 2.10425,
+    cover: "./fotos/p2/01.jpg",
+    gallery: ["./fotos/p2/01.jpg","./fotos/p2/02.jpg","./fotos/p2/03.jpg","./fotos/p2/04.jpg"],
+    description:
+      "En la 1ª planta de un edificio sin ascensor. Hasta 3 personas, ambiente acogedor junto a Barcelona.",
+  },
+  {
+    id: "palmer-3",
+    name: "Palmer III",
+    capacity: 5,
+    bedrooms: 3,
+    bathrooms: 3,
+    area: "123 m²",
+    floor: "2ª planta · sin ascensor",
+    license: "—",
+    night: 145,
+    provider: "Palmer",
+    destination: "L’Hospitalet de Llobregat · Barcelona",
+    lat: 41.3737,
+    lng: 2.10405,
+    cover: "./fotos/p3/01.jpg",
+    gallery: ["./fotos/p3/01.jpg","./fotos/p3/02.jpg","./fotos/p3/03.jpg","./fotos/p3/04.jpg"],
+    description:
+      "123 m², 3 baños, hasta 5 personas. 2ª planta sin ascensor. Ideal para grupos o familias.",
+  },
+];
