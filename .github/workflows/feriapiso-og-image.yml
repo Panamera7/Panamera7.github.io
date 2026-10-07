@@ -1,0 +1,25 @@
+name: Sync feriapiso OG image
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/feriapiso-og-image.yml
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download OG image
+        run: |
+          mkdir -p feriapiso-share
+          curl -sL "https://images.unsplash.com/photo-1580597760000-c173bfeeebf2?ixlib=rb-4.1.0&q=85&fm=jpg&crop=entropy&cs=srgb&w=1200&h=630&fit=crop" -o feriapiso-share/barcelona-mar.jpg
+          ls -la feriapiso-share/barcelona-mar.jpg
+      - name: Commit image if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add feriapiso-share/barcelona-mar.jpg
+          git diff --staged --quiet || git commit -m "Add barcelona-mar.jpg OG image for feriapiso share"
+          git push
