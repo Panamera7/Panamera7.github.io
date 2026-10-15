@@ -15,7 +15,7 @@
     <header class="top">
       <div>
         <h1 class="brand">Gestor<span>IA</span></h1>
-        <p class="sub">v1.2 · lector de facturas en la nube. Nada se presenta solo.</p>
+        <p class="sub">v1.3 · misma app en móvil y portátil. Nada se presenta solo.</p>
       </div>
       <div class="clock" id="clock"></div>
     </header>
@@ -29,7 +29,7 @@
       <div class="grid">
         <article class="card">
           <h2>Subir factura o ticket</h2>
-          <p class="muted">PDF o JPEG/PNG. Con clave de Mindee o OCR.space lee como Holded: campos, no solo letras.</p>
+          <p class="muted">PDF o JPEG/PNG. Con sync, lo que subas en el móvil aparece en el portátil.</p>
           <div class="drop" id="drop">
             <p>Suelta el archivo o</p>
             <button class="btn sec" type="button" id="pickBtn">Elegir o hacer foto</button>
@@ -83,18 +83,24 @@
     <section id="tab-config" class="hidden">
       <article class="card">
         <h2>Lector de facturas</h2>
-        <p class="muted">La clave se guarda solo en este móvil. No viaja a Netcup ni a Grok. Empieza por Mindee (cuenta gratis): <a href="https://platform.mindee.com" target="_blank" rel="noopener">platform.mindee.com</a>. Alternativa: <a href="https://ocr.space/ocrapi" target="_blank" rel="noopener">ocr.space</a>.</p>
-        <label>Clave Mindee (recomendada, facturas)</label>
+        <p class="muted">Clave Mindee: <a href="https://app.mindee.com" target="_blank" rel="noopener">app.mindee.com</a>. Reserva: <a href="https://ocr.space/ocrapi" target="_blank" rel="noopener">ocr.space</a>.</p>
+        <label>Clave Mindee</label>
         <input id="keyMindee" type="password" autocomplete="off" />
-        <label>Clave OCR.space (reserva)</label>
+        <label>Clave OCR.space</label>
         <input id="keySpace" type="password" autocomplete="off" />
-        <button class="btn" type="button" id="saveKeys">Guardar claves</button>
+        <h2 style="margin-top:22px">Misma app en móvil y portátil</h2>
+        <p class="muted">Cuando el servidor esté en marcha, pon aquí su dirección y el PIN. Lo que subas en un aparato aparece en el otro.</p>
+        <label>URL del servidor</label>
+        <input id="apiUrl" placeholder="https://agentes.milchatarras.org/gestoria-api" />
+        <label>PIN</label>
+        <input id="apiPin" type="password" autocomplete="off" />
+        <button class="btn" type="button" id="saveKeys">Guardar</button>
         <p class="muted" id="keyMsg"></p>
       </article>
     </section>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js?v=12"></script>
+  <script src="app.js?v=13"></script>
 </body>
 </html>
