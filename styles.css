@@ -62,3 +62,20 @@ input, select { width: 100%; border: 1px solid var(--line); border-radius: 10px;
 table { width: 100%; border-collapse: collapse; font-size: 14px; }
 th, td { text-align: left; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .right { text-align: right; }
+.preview a.btn { display: inline-block; text-decoration: none; }
+.foto { font-size: 11px; padding: 1px 6px; border-radius: 999px; }
+.foto.ok { background: #dcefe4; color: var(--ok); }
+.foto.pend { background: #f4e2d4; color: var(--warn); }
+#recuperar { margin: 10px 0; }
+.modal { position: fixed; inset: 0; background: rgba(15, 25, 30, 0.82); z-index: 50; overflow: auto; display: flex; align-items: flex-start; justify-content: center; padding: 14px; }
+.modal.hidden { display: none; }
+.modal-in { background: var(--card); border-radius: 18px; padding: 14px; max-width: 940px; width: 100%; }
+.modal-in h2 { font-family: Fraunces, Georgia, serif; font-size: 20px; margin: 0 0 6px; }
+.esc-wrap { position: relative; margin: 8px auto; touch-action: none; user-select: none; -webkit-user-select: none; }
+.esc-wrap canvas { display: block; width: 100%; height: 100%; border-radius: 8px; }
+.esc-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.esc-svg polygon { fill: rgba(15, 110, 107, 0.18); stroke: #19c2bc; stroke-width: 4; vector-effect: non-scaling-stroke; }
+.esq { position: absolute; width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%; border: 3px solid #fff; background: rgba(15, 110, 107, 0.75); box-shadow: 0 0 0 2px var(--teal); touch-action: none; cursor: grab; }
+.esq.drag { background: rgba(196, 163, 90, 0.9); cursor: grabbing; }
+.esc-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.esc-btns .btn { margin-top: 4px; }
