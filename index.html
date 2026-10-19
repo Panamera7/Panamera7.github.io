@@ -15,7 +15,7 @@
     <header class="top">
       <div>
         <h1 class="brand">Gestor<span>IA</span></h1>
-        <p class="sub">v1.4 · control de version. Nada se presenta solo.</p>
+        <p class="sub">v1.5 · escáner y fotos a salvo. Nada se presenta solo.</p>
       </div>
       <div class="clock" id="clock"></div>
     </header>
@@ -29,11 +29,12 @@
       <div class="grid">
         <article class="card">
           <h2>Subir factura o ticket</h2>
-          <p class="muted">PDF o JPEG/PNG. Con sync, lo que subas en el móvil aparece en el portátil.</p>
+          <p class="muted">PDF o foto. Al hacer la foto se recorta el documento como un escáner; la foto original se guarda siempre.</p>
+          <div id="recuperar" class="warnbox hidden"><span id="recuperarTxt"></span> <button class="btn sec" type="button" id="recuperarBtn">Añadirlas a la bandeja</button></div>
           <div class="drop" id="drop">
             <p>Suelta el archivo o</p>
             <button class="btn sec" type="button" id="pickBtn">Elegir o hacer foto</button>
-            <input id="file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp" />
+            <input id="file" type="file" accept="application/pdf,image/*" />
           </div>
           <div class="preview" id="preview"></div>
           <div class="row"><div><label>Entidad</label><select id="entidad"></select></div>
@@ -52,6 +53,8 @@
         <article class="card">
           <h2>Bandeja</h2>
           <p class="muted">Solo lo validado entra en el 303.</p>
+          <p class="muted" id="syncInfo"></p>
+          <button class="btn sec hidden" type="button" id="syncBtn">Reintentar subida ahora</button>
           <div class="list" id="lista"></div>
         </article>
       </div>
@@ -99,8 +102,26 @@
       </article>
     </section>
   </div>
+  <div id="escaner" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="escTitulo">
+    <div class="modal-in">
+      <h2 id="escTitulo">Ajusta el documento</h2>
+      <p class="muted" id="escMsg"></p>
+      <div class="esc-wrap" id="escWrap">
+        <canvas id="escCanvas"></canvas>
+        <svg class="esc-svg" viewBox="0 0 1000 1000" preserveAspectRatio="none"><polygon id="escPoly" points=""></polygon></svg>
+        <div class="esq" aria-label="Esquina superior izquierda"></div><div class="esq" aria-label="Esquina superior derecha"></div><div class="esq" aria-label="Esquina inferior derecha"></div><div class="esq" aria-label="Esquina inferior izquierda"></div>
+      </div>
+      <div class="esc-btns">
+        <button class="btn" type="button" id="escRecortar">Recortar documento</button>
+        <button class="btn sec" type="button" id="escCompleta">Usar foto completa</button>
+        <button class="btn ghost" type="button" id="escAuto">Volver a la detección</button>
+      </div>
+      <p class="muted">La foto original se guarda siempre, elijas lo que elijas.</p>
+    </div>
+  </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-  <script src="app.js?v=14"></script>
+  <script src="escaner.js?v=15"></script>
+  <script src="app.js?v=15"></script>
 </body>
 </html>
